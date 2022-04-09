@@ -11,6 +11,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  FocusNode focus = FocusNode();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,9 +72,11 @@ Widget HomeView(BuildContext context) {
                               TextButton(
                                   child: Text("ok"),
                                   onPressed: () {
-                                    Navigator.pop(context);
+                                    FocusScope.of(context).unfocus();
                                     nameController.text = "resset name";
                                     ageController.text = "0";
+                                    Navigator.pop(context);
+
                                   })
                             ],
                           ))
