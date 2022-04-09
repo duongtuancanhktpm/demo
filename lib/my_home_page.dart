@@ -20,13 +20,27 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(child: HomeView(context)),
     );
   }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    print("canh.dt init");
+  }
 }
 
 Widget HomeView(BuildContext context) {
   String name = "name";
   int age = 0;
-  TextEditingController nameController = new TextEditingController();
-  TextEditingController ageController = new TextEditingController();
+  TextEditingController nameController =
+      new TextEditingController(text: "init name");
+  TextEditingController ageController = new TextEditingController(text: "0");
   return Column(
     children: [
       Center(
@@ -47,17 +61,23 @@ Widget HomeView(BuildContext context) {
                 backgroundColor: Colors.cyan, primary: Colors.white),
             child: Text("submit"),
             onPressed: () => {
-              showDialog(context: context, builder: (BuildContext context) => AlertDialog(
-                title: Text("information"),
-                content: Text("name: ${nameController.text} age: ${ageController.text}"),
-                actions: [TextButton(
-                  child: Text("ok"),
-                  onPressed: () => Navigator.pop(context),
-
-                )],
-
-              ))
-            }),
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) => AlertDialog(
+                            title: Text("information"),
+                            content: Text(
+                                "name: ${nameController.text} age: ${ageController.text}"),
+                            actions: [
+                              TextButton(
+                                  child: Text("ok"),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                    nameController.text = "resset name";
+                                    ageController.text = "0";
+                                  })
+                            ],
+                          ))
+                }),
       )
     ],
   );
