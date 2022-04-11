@@ -12,6 +12,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   FocusNode focus = FocusNode();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,46 +43,67 @@ Widget HomeView(BuildContext context) {
   TextEditingController nameController =
       new TextEditingController(text: "init name");
   TextEditingController ageController = new TextEditingController(text: "0");
-  return Column(
-    children: [
-      Center(
-        child: Text("Form"),
-      ),
-      TextField(
-        controller: nameController,
-        decoration: new InputDecoration.collapsed(hintText: "name"),
-      ),
-      TextFormField(
-        controller: ageController,
-        decoration: new InputDecoration.collapsed(hintText: "age"),
-        keyboardType: TextInputType.number,
-      ),
-      Center(
-        child: TextButton(
-            style: TextButton.styleFrom(
-                backgroundColor: Colors.cyan, primary: Colors.white),
-            child: Text("submit"),
-            onPressed: () => {
-                  showDialog(
-                      context: context,
-                      builder: (BuildContext context) => AlertDialog(
-                            title: Text("information"),
-                            content: Text(
-                                "name: ${nameController.text} age: ${ageController.text}"),
-                            actions: [
-                              TextButton(
-                                  child: Text("ok"),
-                                  onPressed: () {
-                                    FocusScope.of(context).unfocus();
-                                    nameController.text = "resset name";
-                                    ageController.text = "0";
-                                    Navigator.pop(context);
+  return Container(
+    decoration: BoxDecoration(border: Border.all(color: Colors.red)),
+    padding: const EdgeInsets.all(10.0),
+    margin: const EdgeInsets.all(10.0),
+    child: Column(
+      children: [
+        Center(
+          child: Text(
+            "Form",
+            style: TextStyle(
+              color: Colors.blue,
+              fontSize: 30,
+              shadows: <Shadow>[
+                Shadow(
+                  offset: Offset(5.0, 5.0),
+                  blurRadius: 3.0,
+                  color: Color.fromARGB(255, 0, 0, 0),
+                ),
+              ],
+            ),
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.all(10.0),
+        ),
+        TextField(
+          controller: nameController,
+          decoration: new InputDecoration.collapsed(hintText: "name"),
 
-                                  })
-                            ],
-                          ))
-                }),
-      )
-    ],
+        ),
+        TextFormField(
+          controller: ageController,
+          decoration: new InputDecoration.collapsed(hintText: "age"),
+          keyboardType: TextInputType.number,
+        ),
+        Center(
+          child: TextButton(
+              style: TextButton.styleFrom(
+                  backgroundColor: Colors.cyan, primary: Colors.white),
+              child: Text("submit"),
+              onPressed: () => {
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) => AlertDialog(
+                              title: Text("information"),
+                              content: Text(
+                                  "name: ${nameController.text} age: ${ageController.text}"),
+                              actions: [
+                                TextButton(
+                                    child: Text("ok"),
+                                    onPressed: () {
+                                      FocusScope.of(context).unfocus();
+                                      nameController.text = "resset name";
+                                      ageController.text = "0";
+                                      Navigator.pop(context);
+                                    })
+                              ],
+                            ))
+                  }),
+        )
+      ],
+    ),
   );
 }
